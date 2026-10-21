@@ -357,6 +357,439 @@
       .stage { padding: 16px; order: -1; position: sticky; top: 0; z-index: 20; }
       .time-text { width: 78px; }
     }
+
+    /* ═══════════════════════════════════════════════
+       SYRINGE · MED-KIT 에디터 스킨 (가챠 연출기)
+       윳! 채팅 발췌기(index-du) 스킨과 같은 톤
+       mono white × black · point blue · glass
+       (겉모습만 바꿔요 — 영상에 그려지는 연출은 그대로)
+    ═══════════════════════════════════════════════ */
+    :root {
+      --rx-p: #2FA4DE;
+      --rx-p2: #1C86C2;
+      --rx-pl: #8FDCFB;
+      --rx-k: #0E0F12;
+      --rx-sub: #6A7079;
+      --rx-g1: #F3F4F6;
+      --rx-g2: #E4E6EA;
+      --rx-g4: #8B919A;
+      --rx-ring: inset 0 0 0 1px rgba(14, 15, 18, 0.08);
+    }
+    body { letter-spacing: -0.03em; }
+
+    /* ── 에디터 바탕 ── */
+    .editor {
+      position: relative;
+      background-color: #EEEFF2 !important;
+      background-image:
+        radial-gradient(70% 30% at 0% 0%, rgba(47, 164, 222, 0.16), transparent 70%),
+        radial-gradient(60% 26% at 100% 60%, rgba(47, 164, 222, 0.1), transparent 70%),
+        radial-gradient(circle, rgba(14, 15, 18, 0.09) 1px, transparent 1.4px) !important;
+      background-size: auto, auto, 18px 18px !important;
+      border-right: 1px solid rgba(14, 15, 18, 0.08) !important;
+      box-shadow: 8px 0 40px -24px rgba(14, 15, 18, 0.3) !important;
+      padding: 16px 16px 60px !important;
+      counter-reset: rxsec;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(14, 15, 18, 0.16) transparent;
+    }
+    .editor::-webkit-scrollbar { width: 10px; }
+    .editor::-webkit-scrollbar-thumb {
+      background: rgba(14, 15, 18, 0.16) !important;
+      border: 3px solid transparent;
+      border-radius: 9px !important;
+      background-clip: padding-box;
+    }
+    .editor::-webkit-scrollbar-thumb:hover { background: rgba(14, 15, 18, 0.3) !important; background-clip: padding-box; }
+
+    /* 맨 위 유리 바 */
+    .editor::before {
+      content: "EDITOR  ·  Gacha";
+      flex-shrink: 0;
+      height: 36px;
+      padding: 0 16px 0 32px;
+      border-radius: 999px;
+      white-space: pre;
+      font: 700 10.5px/36px 'Pretendard', sans-serif;
+      letter-spacing: -0.01em;
+      color: var(--rx-sub);
+      background:
+        radial-gradient(circle, #2FA4DE 0 3.2px, transparent 3.7px) 14px 50%/8px 8px no-repeat,
+        rgba(255, 255, 255, 0.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      backdrop-filter: blur(18px) saturate(1.5);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9), 0 10px 26px -18px rgba(14, 15, 18, 0.35);
+    }
+    /* 맨 위 바 오른쪽 칩 */
+    .editor::after {
+      content: "v1.0";
+      position: absolute;
+      top: 21px;
+      right: 21px;
+      height: 26px;
+      padding: 0 11px;
+      border-radius: 999px;
+      font: 800 10px/26px 'Pretendard', sans-serif;
+      letter-spacing: -0.01em;
+      color: #fff;
+      background: #0E0F12;
+      pointer-events: none;
+    }
+
+    /* ── 제목 ── */
+    .editor-title {
+      flex-wrap: wrap;
+      font-size: 22px !important;
+      font-weight: 900 !important;
+      letter-spacing: -0.06em !important;
+      color: var(--rx-k) !important;
+      border-bottom: none !important;
+      padding: 0 4px !important;
+      gap: 6px !important;
+      row-gap: 0 !important;
+    }
+    .editor-title .hl {
+      background: var(--rx-k) !important;
+      color: #fff;
+      padding: 0 6px 1px;
+      border-radius: 4px;
+      margin: 0 1px;
+    }
+    .editor-title::after {
+      content: "";
+      flex-basis: 100%;
+      margin-top: 2px;
+      padding-bottom: 12px;
+      background:
+        repeating-linear-gradient(90deg, rgba(14, 15, 18, .2) 0 1px, transparent 1px 8px) 0 100%/100% 4px no-repeat,
+        repeating-linear-gradient(90deg, rgba(14, 15, 18, .42) 0 1px, transparent 1px 40px) 0 100%/100% 8px no-repeat;
+    }
+    .syringe-logo-svg {
+      width: 54px !important;
+      height: 54px !important;
+      margin: 2px 0 0 -6px !important;
+      overflow: visible;
+      filter: drop-shadow(0 4px 8px rgba(47, 164, 222, 0.4)) !important;
+    }
+    .btn-reset {
+      border: 0 !important;
+      background: rgba(255, 255, 255, 0.75) !important;
+      box-shadow: var(--rx-ring);
+      color: var(--rx-sub) !important;
+      letter-spacing: -0.03em !important;
+    }
+    .btn-reset:hover { background: var(--rx-k) !important; color: #fff !important; }
+
+    /* ── 패널 카드 = 유리 ── */
+    .panel-card {
+      gap: 12px !important;
+      padding: 16px 16px 17px !important;
+      background: rgba(255, 255, 255, 0.55) !important;
+      border: 0 !important;
+      border-radius: 22px !important;
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      backdrop-filter: blur(20px) saturate(1.5) !important;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+        inset 0 1px 0 #fff,
+        0 22px 44px -32px rgba(14, 15, 18, 0.4) !important;
+    }
+    .panel-card-title {
+      display: block !important;
+      counter-increment: rxsec;
+      font-size: 13.5px !important;
+      font-weight: 900 !important;
+      letter-spacing: -0.05em !important;
+      color: var(--rx-k) !important;
+      padding-bottom: 10px;
+      margin-bottom: 0 !important;
+      border-bottom: 1px dashed rgba(14, 15, 18, 0.12);
+    }
+    .panel-card-title::first-letter { color: var(--rx-p); }
+    /* 패널 번호 (연한 글자만, 칩 없이) */
+    .panel-card-title::after {
+      content: "№ " counter(rxsec, decimal-leading-zero);
+      float: right;
+      margin-top: 2px;
+      font: 800 10px/1 'Pretendard', sans-serif;
+      letter-spacing: 0;
+      color: #8B919A;
+      opacity: 0.8;
+    }
+    .panel-divider {
+      height: 0 !important;
+      background: none !important;
+      border-top: 1px dashed rgba(14, 15, 18, 0.1);
+    }
+    .label-sub {
+      color: var(--rx-k) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.03em !important;
+    }
+    .hint { color: var(--rx-g4) !important; }
+
+    /* ── 입력칸 ── */
+    textarea, input[type="text"] {
+      border: 0 !important;
+      background: #fff !important;
+      border-radius: 12px !important;
+      box-shadow: inset 0 0 0 1px rgba(14, 15, 18, 0.1);
+      color: var(--rx-k) !important;
+    }
+    textarea { border-radius: 14px !important; }
+    textarea:focus, input[type="text"]:focus { box-shadow: inset 0 0 0 1.5px #2FA4DE, 0 0 0 3px rgba(47, 164, 222, 0.16) !important; }
+    textarea::placeholder, input[type="text"]::placeholder { color: var(--rx-g4) !important; }
+
+    /* ── 토글 ── */
+    .sw-track {
+      background: var(--rx-g2) !important;
+      box-shadow: inset 0 1px 2px rgba(14, 15, 18, 0.12);
+    }
+    .toggle-row.on .sw-track { background: var(--rx-p) !important; }
+    .toggle-label { font-weight: 800 !important; letter-spacing: -0.03em; }
+
+    /* ── 세그먼트 버튼 ── */
+    .seg-buttons {
+      background: rgba(255, 255, 255, 0.5) !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      box-shadow: var(--rx-ring);
+      gap: 3px !important;
+    }
+    .seg-buttons button {
+      border-radius: 999px !important;
+      color: var(--rx-sub) !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.03em;
+    }
+    .seg-buttons button:hover { color: var(--rx-k) !important; }
+    .seg-buttons button.on {
+      background: var(--rx-k) !important;
+      color: #fff !important;
+      font-weight: 800 !important;
+      box-shadow: 0 6px 12px -8px rgba(14, 15, 18, 0.7) !important;
+    }
+    #sig-pos button { font-size: 11.5px !important; }
+
+    /* ── 별 개수 ── */
+    .star-picker button {
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: rgba(255, 255, 255, 0.7) !important;
+      box-shadow: var(--rx-ring);
+      color: var(--rx-g4) !important;
+    }
+    .star-picker button:hover { box-shadow: inset 0 0 0 1px rgba(47, 164, 222, 0.5); }
+    .star-picker button.on {
+      background: var(--rx-k) !important;
+      color: #fff !important;
+      box-shadow: 0 8px 16px -10px rgba(14, 15, 18, 0.7) !important;
+    }
+    .star-picker button.on svg { color: var(--rx-p); }
+
+    /* ── 슬라이더 (하트 그대로, 트랙만 얇게) ── */
+    .range-row input[type="range"]::-webkit-slider-runnable-track { height: 5px; }
+    .range-row input[type="range"]::-webkit-slider-thumb { margin-top: -8.5px; }
+    .range-row .rlabel { color: var(--rx-sub) !important; font-weight: 700 !important; }
+    .range-row .rval {
+      color: var(--rx-k) !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.02em;
+      opacity: 0.75;
+    }
+
+    /* ── 파일 / 썸네일 ── */
+    .file-dropzone {
+      border: 1px solid rgba(14, 15, 18, 0.22) !important;
+      background: rgba(255, 255, 255, 0.6) !important;
+      border-radius: 14px !important;
+      color: rgba(14, 15, 18, 0.75) !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.03em;
+    }
+    .file-dropzone:hover {
+      border-color: #2FA4DE !important;
+      background: rgba(47, 164, 222, 0.07) !important;
+      color: var(--rx-p2) !important;
+    }
+    .file-dropzone.filled {
+      border-color: rgba(47, 164, 222, 0.45) !important;
+      background: rgba(47, 164, 222, 0.08) !important;
+      color: var(--rx-p2) !important;
+    }
+    .img-thumb {
+      border: 0 !important;
+      border-radius: 14px !important;
+      background-color: rgba(255, 255, 255, 0.6) !important;
+      box-shadow: var(--rx-ring);
+    }
+    .img-thumb .tag { background: var(--rx-k) !important; border-radius: 999px !important; padding: 2px 8px !important; }
+    .img-thumb.after .tag { background: var(--rx-p) !important; }
+
+    /* ── 색 · 작은 버튼 · 팁 ── */
+    .color-pair {
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: #fff !important;
+      box-shadow: inset 0 0 0 1px rgba(14, 15, 18, 0.1);
+      color: var(--rx-k) !important;
+      font-weight: 800 !important;
+      padding: 6px 12px !important;
+    }
+    .color-pair input[type="color"] { border: 0 !important; box-shadow: 0 0 0 1px rgba(14, 15, 18, 0.15); }
+    .btn-mini {
+      background: rgba(255, 255, 255, 0.8) !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      box-shadow: var(--rx-ring);
+      padding: 4px 10px !important;
+    }
+    .tip {
+      background: rgba(255, 255, 255, 0.72) !important;
+      border-radius: 12px !important;
+      box-shadow: inset 3px 0 0 #beccd2, var(--rx-ring);
+      color: var(--rx-sub) !important;
+      padding: 9px 12px 9px 14px !important;
+    }
+    .tip b { color: var(--rx-k) !important; font-weight: 700 !important; }
+
+    /* ── 저장 버튼 ── */
+    .save-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--rx-k) !important;
+      border-radius: 999px !important;
+      letter-spacing: -0.03em !important;
+      box-shadow: 0 14px 26px -14px rgba(14, 15, 18, 0.7) !important;
+    }
+    .save-btn::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #2FA4DE;
+      box-shadow: 0 0 8px #2FA4DE;
+      animation: rxEdBlink 2.4s ease-in-out infinite;
+    }
+    .save-btn:not(:disabled):hover {
+      background: var(--rx-p) !important;
+      box-shadow: 0 14px 26px -12px rgba(47, 164, 222, 0.9) !important;
+    }
+    .save-btn:not(:disabled):hover::before { background: #fff; box-shadow: 0 0 8px #fff; }
+    .save-btn.gif {
+      background: rgba(255, 255, 255, 0.65) !important;
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      color: var(--rx-k) !important;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 1px rgba(14, 15, 18, 0.08), 0 12px 24px -18px rgba(14, 15, 18, 0.45) !important;
+    }
+    .save-btn.gif::before { display: none; }
+    .save-btn.gif:not(:disabled):hover { background: #fff !important; color: var(--rx-p) !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 1px rgba(14, 15, 18, 0.08), 0 12px 24px -18px rgba(14, 15, 18, 0.45) !important; }
+    @keyframes rxEdBlink { 50% { opacity: 0.2; } }
+    .progress-bar { background: var(--rx-g2) !important; }
+    .progress-fill { background: var(--rx-p) !important; }
+    .progress-text { color: var(--rx-sub) !important; }
+
+    /* ── 미리보기 무대 (무채색 하프톤 + 하늘빛) ── */
+    .stage {
+      background-color: #EEEFF2 !important;
+      background-image:
+        radial-gradient(38% 34% at 22% 14%, rgba(47, 164, 222, 0.2), transparent 70%),
+        radial-gradient(32% 30% at 86% 74%, rgba(47, 164, 222, 0.14), transparent 70%),
+        radial-gradient(30% 26% at 40% 92%, rgba(14, 15, 18, 0.05), transparent 70%),
+        radial-gradient(circle, rgba(14, 15, 18, 0.1) 1px, transparent 1.4px) !important;
+      background-size: auto, auto, auto, 22px 22px !important;
+    }
+    @media (min-width: 861px) {
+      .stage { position: relative; }
+      .stage > * { position: relative; z-index: 1; }
+      .stage::before,
+      .stage::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* 네 귀퉁이 십자 표시 */
+      .stage::before {
+        inset: 14px;
+        opacity: 0.3;
+        background:
+          linear-gradient(#0E0F12, #0E0F12) 0 8px/16px 1px no-repeat, linear-gradient(#0E0F12, #0E0F12) 8px 0/1px 16px no-repeat,
+          linear-gradient(#0E0F12, #0E0F12) 100% 8px/16px 1px no-repeat, linear-gradient(#0E0F12, #0E0F12) calc(100% - 8px) 0/1px 16px no-repeat,
+          linear-gradient(#0E0F12, #0E0F12) 0 calc(100% - 8px)/16px 1px no-repeat, linear-gradient(#0E0F12, #0E0F12) 8px 100%/1px 16px no-repeat,
+          linear-gradient(#0E0F12, #0E0F12) 100% calc(100% - 8px)/16px 1px no-repeat, linear-gradient(#0E0F12, #0E0F12) calc(100% - 8px) 100%/1px 16px no-repeat;
+      }
+      /* 세로 글자 */
+      .stage::after {
+        content: "@zZnaptime ─ Gacha EDITOR";
+        right: 18px;
+        bottom: 40px;
+        writing-mode: vertical-rl;
+        white-space: pre;
+        font: 700 9.5px/1 'Pretendard', sans-serif;
+        letter-spacing: -0.01em;
+        color: var(--rx-g4);
+      }
+    }
+
+    /* 플레이어 */
+    .player {
+      border: 0 !important;
+      border-radius: 22px !important;
+      background: rgba(255, 255, 255, 0.6) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      backdrop-filter: blur(18px) saturate(1.5);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95), 0 12px 28px -18px rgba(14, 15, 18, 0.4) !important;
+    }
+    .play-btn {
+      background: var(--rx-k) !important;
+      box-shadow: 0 8px 16px -10px rgba(14, 15, 18, 0.7) !important;
+      transition: background .2s ease;
+    }
+    .play-btn:hover { background: var(--rx-p) !important; }
+    .icon-btn {
+      border: 0 !important;
+      background: #fff !important;
+      box-shadow: var(--rx-ring);
+      color: var(--rx-k) !important;
+    }
+    .icon-btn:hover { background: var(--rx-p) !important; color: #fff !important; }
+    .icon-btn.muted { color: var(--rx-g4) !important; }
+    .icon-btn.muted:hover { color: #fff !important; }
+    .time-text { color: var(--rx-k) !important; opacity: 0.75; }
+    .phase-chip {
+      border: 0 !important;
+      background: rgba(255, 255, 255, 0.75) !important;
+      box-shadow: var(--rx-ring);
+      color: var(--rx-sub) !important;
+    }
+    .phase-chip:hover { color: var(--rx-k) !important; }
+    .phase-chip.on { background: var(--rx-k) !important; color: #fff !important; box-shadow: none; }
+
+    /* ── 초기화 모달 ── */
+    #reset-modal { background: rgba(14, 15, 18, 0.35) !important; }
+    .reset-card {
+      background: linear-gradient(170deg, #ffffff 55%, #f2f9fe) !important;
+      border-radius: 26px !important;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 1px rgba(14, 15, 18, 0.08), 0 40px 80px -40px rgba(14, 15, 18, 0.55) !important;
+    }
+    .reset-icon {
+      background: radial-gradient(circle at 40% 35%, #ffffff, #e6f3fb 70%) !important;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 6px rgba(47, 164, 222, 0.1), 0 12px 26px -10px rgba(47, 164, 222, 0.4) !important;
+      color: var(--rx-p) !important;
+    }
+    .reset-title { color: var(--rx-k) !important; font-weight: 900 !important; letter-spacing: -0.05em; }
+    .reset-actions button { border-radius: 999px !important; }
+    #btn-reset-cancel { background: #fff !important; border: 0 !important; box-shadow: inset 0 0 0 1px rgba(14, 15, 18, 0.14); color: var(--rx-k) !important; }
+    #btn-reset-confirm { background: var(--rx-k) !important; box-shadow: 0 10px 20px -12px rgba(14, 15, 18, 0.7) !important; }
+    #btn-reset-confirm:hover { background: var(--rx-p) !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .save-btn::before { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -365,38 +798,112 @@
     <h1 class="editor-title">
       <svg class="syringe-logo-svg" viewBox="0 0 120 460" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <pattern id="syringeHalftone" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
-            <circle cx="3" cy="3" r="1.4" fill="#ffffff" opacity="0.65"></circle>
-          </pattern>
-          <linearGradient id="softSyringeFluid" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#dbeafe"></stop>
-            <stop offset="50%" stop-color="#85c8f2"></stop>
-            <stop offset="100%" stop-color="#51aae1"></stop>
+          <linearGradient id="logoGlass" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"></stop>
+            <stop offset="45%" stop-color="#eaf6fd" stop-opacity="0.7"></stop>
+            <stop offset="100%" stop-color="#cfe9f9" stop-opacity="0.85"></stop>
           </linearGradient>
-          <clipPath id="barrelClip"><rect x="38.5" y="85" width="43" height="175"></rect></clipPath>
+          <linearGradient id="logoFluid" x1="0" y1="110" x2="0" y2="255" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#a9dcf8"></stop>
+            <stop offset="55%" stop-color="#6cc0ee"></stop>
+            <stop offset="100%" stop-color="#2FA4DE"></stop>
+          </linearGradient>
+          <linearGradient id="logoNeedle" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff"></stop>
+            <stop offset="50%" stop-color="#9fb4c3"></stop>
+            <stop offset="100%" stop-color="#5f7a8d"></stop>
+          </linearGradient>
+          <pattern id="logoHalftone" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+            <circle cx="3" cy="3" r="1.3" fill="#ffffff" opacity="0.55"></circle>
+          </pattern>
+          <clipPath id="logoClip">
+            <rect x="38.5" y="87" width="43" height="166" rx="4"></rect>
+          </clipPath>
         </defs>
-        <path d="M60 0 V60" stroke="#328ec7" stroke-width="4.5" stroke-linecap="round"></path>
-        <rect x="47" y="60" width="26" height="15" rx="3" fill="#ffffff" stroke="#328ec7" stroke-width="3"></rect>
-        <line x1="47" y1="68" x2="73" y2="68" stroke="#85c8f2" stroke-width="3"></line>
-        <rect x="34" y="75" width="52" height="10" rx="3" fill="#85c8f2" stroke="#328ec7" stroke-width="3"></rect>
-        <rect x="36" y="85" width="48" height="265" rx="6" fill="#ffffff" stroke="#328ec7" stroke-width="3.2"></rect>
-        <rect x="38.5" y="85" width="43" height="175" fill="url(#softSyringeFluid)"></rect>
-        <rect x="38.5" y="85" width="43" height="175" fill="url(#syringeHalftone)"></rect>
-        <g clip-path="url(#barrelClip)">
-          <path d="M50 245 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#ffffff">
-            <animateTransform attributeName="transform" type="translate" from="0 0" to="0 -150" dur="2.2s" repeatCount="indefinite"></animateTransform>
-            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.85;1" dur="2.2s" repeatCount="indefinite"></animate>
-          </path>
-          <circle cx="67" cy="245" r="5" fill="#ffffff">
-            <animate attributeName="cy" from="245" to="90" dur="2.5s" begin="0.4s" repeatCount="indefinite"></animate>
-            <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.15;0.85;1" dur="2.5s" begin="0.4s" repeatCount="indefinite"></animate>
+
+        <!-- 바늘 (끝에 반짝임) -->
+        <rect x="57.8" y="4" width="4.4" height="58" rx="2.2" fill="url(#logoNeedle)"></rect>
+        <path d="M57.8 8 L60 -2 L62.2 8 Z" fill="#9fb4c3"></path>
+        <circle cx="60" cy="-1" r="3.2" fill="#ffffff">
+          <animate attributeName="r" values="1.5;4.2;1.5" dur="2.60s" repeatCount="indefinite"></animate>
+          <animate attributeName="opacity" values="0.2;1;0.2" dur="2.60s" repeatCount="indefinite"></animate>
+        </circle>
+
+        <!-- 허브 -->
+        <rect x="47" y="58" width="26" height="18" rx="5" fill="url(#logoGlass)" stroke="#51aae1" stroke-width="2.6"></rect>
+        <rect x="51" y="62" width="4" height="10" rx="2" fill="#ffffff" opacity="0.9"></rect>
+        <rect x="32" y="74" width="56" height="12" rx="6" fill="#85c8f2" stroke="#3d98cf" stroke-width="2.6"></rect>
+        <rect x="38" y="76.5" width="22" height="3" rx="1.5" fill="#ffffff" opacity="0.7"></rect>
+
+        <!-- 유리 실린더 -->
+        <rect x="36" y="85" width="48" height="267" rx="9" fill="url(#logoGlass)" stroke="#51aae1" stroke-width="3"></rect>
+
+        <!-- 출렁이는 약액 -->
+        <g clip-path="url(#logoClip)">
+          <g>
+            <path d="M-4.5 120 q10.75 -7 21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0 V262 H-4.5 Z" fill="url(#logoFluid)"></path>
+            <path d="M-4.5 120 q10.75 -7 21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0 V262 H-4.5 Z" fill="url(#logoHalftone)"></path>
+            <path d="M-4.5 120 q10.75 -7 21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0 t21.5 0" stroke="#ffffff" stroke-width="2.4" stroke-opacity="0.85"></path>
+            <animateTransform attributeName="transform" type="translate" values="0 0; -21.5 2.5; -43 0" dur="3.20s" repeatCount="indefinite"></animateTransform>
+          </g>
+
+          <!-- 뽀글뽀글 기포 -->
+          <circle cx="50" cy="245" r="4.2" fill="#ffffff">
+            <animate attributeName="cy" from="245" to="118" dur="2.40s" repeatCount="indefinite"></animate>
+            <animate attributeName="cx" values="50;46;53;50" dur="2.40s" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.15;0.85;1" dur="2.40s" repeatCount="indefinite"></animate>
+          </circle>
+          <circle cx="67" cy="245" r="5.4" fill="#ffffff">
+            <animate attributeName="cy" from="245" to="118" dur="3.00s" begin="0.5s" repeatCount="indefinite"></animate>
+            <animate attributeName="cx" values="67;71;63;67" dur="3.00s" begin="0.5s" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.15;0.85;1" dur="3.00s" begin="0.5s" repeatCount="indefinite"></animate>
+          </circle>
+          <circle cx="58" cy="245" r="3" fill="#eff6ff">
+            <animate attributeName="cy" from="245" to="118" dur="2.00s" begin="0.2s" repeatCount="indefinite"></animate>
+            <animate attributeName="cx" values="58;55;60;58" dur="2.00s" begin="0.2s" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.15;0.85;1" dur="2.00s" begin="0.2s" repeatCount="indefinite"></animate>
           </circle>
         </g>
-        <rect x="38.5" y="252" width="43" height="10" fill="#1b4b6b"></rect>
-        <rect x="42" y="262" width="36" height="6" fill="#328ec7"></rect>
-        <rect x="54" y="268" width="12" height="120" fill="#f8fafc" stroke="#328ec7" stroke-width="3"></rect>
-        <rect x="32" y="388" width="56" height="12" rx="4" fill="#ffffff" stroke="#328ec7" stroke-width="3"></rect>
-        <rect x="37" y="391" width="46" height="6" rx="2" fill="#85c8f2"></rect>
+
+        <!-- 눈금 -->
+        <g stroke="#3d98cf" stroke-linecap="round" opacity="0.75">
+          <line x1="70" y1="110" x2="80" y2="110" stroke-width="2.4"></line>
+          <line x1="74" y1="128" x2="80" y2="128" stroke-width="1.8"></line>
+          <line x1="70" y1="146" x2="80" y2="146" stroke-width="2.4"></line>
+          <line x1="74" y1="164" x2="80" y2="164" stroke-width="1.8"></line>
+          <line x1="70" y1="182" x2="80" y2="182" stroke-width="2.4"></line>
+          <line x1="74" y1="200" x2="80" y2="200" stroke-width="1.8"></line>
+          <line x1="70" y1="218" x2="80" y2="218" stroke-width="2.4"></line>
+          <line x1="74" y1="236" x2="80" y2="236" stroke-width="1.8"></line>
+        </g>
+
+        <!-- 유리 하이라이트 -->
+        <rect x="41.5" y="94" width="5" height="244" rx="2.5" fill="#ffffff" opacity="0.85"></rect>
+        <rect x="49" y="96" width="2" height="90" rx="1" fill="#ffffff" opacity="0.6"></rect>
+
+        <!-- 고무 마개 -->
+        <rect x="38.5" y="252" width="43" height="12" rx="3" fill="#2a6f99"></rect>
+        <rect x="38.5" y="255" width="43" height="2" fill="#ffffff" opacity="0.25"></rect>
+        <rect x="38.5" y="260" width="43" height="2" fill="#ffffff" opacity="0.25"></rect>
+
+        <!-- 손잡이 날개 -->
+        <rect x="22" y="346" width="76" height="12" rx="6" fill="#ffffff" stroke="#51aae1" stroke-width="2.8"></rect>
+        <rect x="28" y="349" width="30" height="3" rx="1.5" fill="#85c8f2"></rect>
+
+        <!-- 밀대 + 엄지 받침 -->
+        <rect x="54" y="264" width="12" height="122" rx="3" fill="url(#logoGlass)" stroke="#51aae1" stroke-width="2.6"></rect>
+        <rect x="57" y="270" width="2.6" height="108" rx="1.3" fill="#ffffff" opacity="0.9"></rect>
+        <rect x="30" y="386" width="60" height="16" rx="8" fill="#ffffff" stroke="#51aae1" stroke-width="2.8"></rect>
+        <rect x="36" y="390" width="48" height="7" rx="3.5" fill="url(#logoFluid)"></rect>
+
+        <!-- 곁에서 반짝이는 ✦ -->
+        <path d="M100 118 C101.3 126 104 128.7 112 130 C104 131.3 101.3 134 100 142 C98.7 134 96 131.3 88 130 C96 128.7 98.7 126 100 118 Z" fill="#2FA4DE">
+          <animateTransform attributeName="transform" type="rotate" values="0 100 130; 45 100 130; 0 100 130" dur="3.00s" repeatCount="indefinite"></animateTransform>
+          <animate attributeName="opacity" values="0.25;1;0.25" dur="3.00s" repeatCount="indefinite"></animate>
+        </path>
+        <path d="M14 214 C14.8 219 16.6 220.8 21.6 221.6 C16.6 222.4 14.8 224.2 14 229.2 C13.2 224.2 11.4 222.4 6.4 221.6 C11.4 220.8 13.2 219 14 214 Z" fill="#85c8f2">
+          <animate attributeName="opacity" values="1;0.2;1" dur="2.40s" repeatCount="indefinite"></animate>
+        </path>
       </svg>
       <span>윳! <span class="hl">아이돌 가챠</span> 메이커</span>
       <button type="button" class="btn-reset" id="btn-reset" title="모든 설정을 기본값으로">
@@ -520,6 +1027,21 @@
         💡 <b>★1~2</b> 은은한 반짝임 / <b>★3</b> 스포트라이트 / <b>★4</b> 금빛 라이트·꽃가루 / <b>★5</b> 프리즘 균열·화면 흔들림<br>
         <span style="font-size:11px; opacity:.85;">→ 각성 후 장면은 한 단계 더 화려하게 연출돼요!</span>
       </div>
+
+      <div class="panel-divider"></div>
+
+      <div class="field-group">
+        <div class="label-header-row">
+          <span class="label-sub">효과음</span>
+          <span class="hint">MP4에는 소리도 같이 저장됩니다</span>
+        </div>
+        <div class="toggle-row" id="tog-sfx">
+          <div class="sw-track"></div>
+          <span class="toggle-label">효과음 켜기</span>
+        </div>
+        <div class="range-row" id="sfx-vol-row"><span class="rlabel">볼륨</span><input type="range" id="in-sfx-vol" min="0" max="100" value="70"><span class="rval" id="sfx-vol-val">70%</span></div>
+        <span class="hint">🔊 등급에 따라 소리가 달라집니다.</span>
+      </div>
     </section>
 
     <!-- 5. 저장 -->
@@ -544,7 +1066,7 @@
           <button data-f="15" class="on">15fps</button>
           <button data-f="20">20fps</button>
         </div>
-        <span class="hint">*GIF는 크기·프레임이 클수록 용량이 커지고 저장이 오래 걸려요.</span>
+        <span class="hint">*GIF는 크기·프레임이 클수록 용량이 커지고 저장이 오래 걸려요. GIF에는 소리가 들어가지 않아요.</span>
       </div>
       <div class="export-row">
         <button class="save-btn" id="btn-mp4">MP4 저장</button>
@@ -581,6 +1103,7 @@
         <button class="icon-btn" id="btn-restart" title="처음부터">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 3 3 9 9 9"/></svg>
         </button>
+        <button class="icon-btn" id="btn-sfx" title="효과음 켜기 / 끄기"></button>
         <div class="range-row scrub-wrap"><input type="range" id="scrub" min="0" max="1000" value="0" step="1"></div>
         <span class="time-text" id="time-text">0.0 / 0.0s</span>
       </div>
@@ -618,6 +1141,8 @@
     gifW: 640,
     gifFps: 15,
     frameTarget: 'before',
+    sfx: true,
+    sfxVol: 70,
     frame: { before: { z: 1, x: 0, y: 0 }, after: { z: 1, x: 0, y: 0 } }
   };
   const imgs = { before: null, after: null, sig: null };
@@ -1383,6 +1908,351 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
 
+
+  // =========================================================
+  //  효과음 (Web Audio로 직접 합성 — 외부 소리 파일 없음)
+  //  · 미리보기: 재생 중일 때 타임라인에 맞춰 실시간으로 남
+  //  · MP4 저장: 같은 소리를 따로 렌더해서 영상에 같이 넣음
+  //  · 별 개수(★1~5)와 각성 전/후에 따라 소리 구성이 달라짐
+  // =========================================================
+  const midiHz = m => 440 * Math.pow(2, (m - 69) / 12);
+  const noiseCache = new WeakMap();
+  function noiseBuf(ac) {
+    let b = noiseCache.get(ac);
+    if (!b) {
+      b = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
+      const d = b.getChannelData(0), r = rng(9091);
+      for (let i = 0; i < d.length; i++) d[i] = r() * 2 - 1;
+      noiseCache.set(ac, b);
+    }
+    return b;
+  }
+  function sEnv(A, at, peak, a, dur) {
+    const g = A.ac.createGain();
+    g.gain.setValueAtTime(0.0001, at);
+    g.gain.linearRampToValueAtTime(peak, at + a);
+    g.gain.exponentialRampToValueAtTime(0.0001, at + Math.max(a + 0.02, dur));
+    return g;
+  }
+  // 기본 음 (사인/삼각/톱니…)
+  function sTone(A, at, o) {
+    const ac = A.ac, osc = ac.createOscillator();
+    osc.type = o.type || 'sine';
+    osc.frequency.setValueAtTime(o.f, at);
+    if (o.f1) osc.frequency.exponentialRampToValueAtTime(o.f1, at + (o.glide || o.dur));
+    let node = osc;
+    if (o.lp) { const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; node.connect(f); node = f; }
+    const g = sEnv(A, at, o.gain, o.a ?? 0.005, o.dur);
+    node.connect(g); g.connect(A.out);
+    osc.start(at); osc.stop(at + o.dur + 0.05);
+  }
+  // 걸러낸 잡음 (휙, 쾅, 바스락…)
+  function sNoise(A, at, o) {
+    const ac = A.ac, src = ac.createBufferSource();
+    src.buffer = noiseBuf(ac); src.loop = true;
+    const f = ac.createBiquadFilter();
+    f.type = o.ft || 'bandpass'; f.Q.value = o.Q ?? 1;
+    f.frequency.setValueAtTime(o.f, at);
+    if (o.f1) f.frequency.exponentialRampToValueAtTime(o.f1, at + o.dur);
+    const g = sEnv(A, at, o.gain, o.a ?? 0.005, o.dur);
+    src.connect(f); f.connect(g); g.connect(A.out);
+    src.start(at, A.r() * 1.5); src.stop(at + o.dur + 0.05);
+  }
+  // 종소리 (반짝임 · 별)
+  function sBell(A, at, m, gain, dur = 1.2) {
+    const f = midiHz(m);
+    const ny = A.ac.sampleRate * 0.45;
+    [[1, 1, 1], [2, 0.32, 0.6], [3.01, 0.16, 0.4], [4.17, 0.08, 0.25]].forEach(([mul, gm, dm]) => {
+      if (f * mul < ny) sTone(A, at, { f: f * mul, gain: gain * gm, dur: dur * dm, a: 0.003 });
+    });
+  }
+  // 길게 깔리는 화음 (드론 · 합창 느낌)
+  function sPad(A, at, notes, gain, dur, o = {}) {
+    const ac = A.ac, atk = o.a ?? 0.4, rel = o.rel ?? 0.6;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0.0001, at);
+    g.gain.linearRampToValueAtTime(gain, at + atk);
+    g.gain.setValueAtTime(gain, at + Math.max(atk + 0.01, dur - rel));
+    g.gain.linearRampToValueAtTime(0.0001, at + Math.max(atk + 0.02, dur));
+    const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp || 1600; f.Q.value = 0.7;
+    f.connect(g); g.connect(A.out);
+    const each = 1 / (notes.length * 2);
+    notes.forEach(m => [-8, 8].forEach(dt => {
+      const osc = ac.createOscillator(); osc.type = o.type || 'sawtooth';
+      osc.frequency.value = midiHz(m); osc.detune.value = dt;
+      const og = ac.createGain(); og.gain.value = each;
+      osc.connect(og); og.connect(f);
+      osc.start(at); osc.stop(at + dur + 0.05);
+    }));
+  }
+  // 쿵! (폭발 · 카드 등장)
+  function sImpact(A, at, size) {
+    sTone(A, at, { f: 120, f1: 36, dur: 0.45 + size * 0.5, gain: 0.5 * size, a: 0.004 });
+    sNoise(A, at, { ft: 'lowpass', f: 3200, f1: 160, dur: 0.35 + size * 0.4, gain: 0.3 * size, Q: 0.5 });
+    sNoise(A, at, { ft: 'highpass', f: 2500, dur: 0.05, gain: 0.16 * size, Q: 0.5 });
+  }
+  // 휙 (스윕 · 플레이트 슬라이드)
+  function sWhoosh(A, at, dur, f0, f1, gain) {
+    sNoise(A, at, { f: f0, f1, dur, gain, Q: 0.9, a: dur * 0.45 });
+  }
+  // 차오르는 소리 (폭발 직전 · 빛의 문)
+  function sRiser(A, at, dur, size) {
+    sNoise(A, at, { f: 300, f1: 6000, dur, gain: 0.11 * size, Q: 1.6, a: dur * 0.9 });
+    sTone(A, at, { type: 'triangle', f: 110, f1: 880, dur, gain: 0.03 * size, a: dur * 0.85 });
+  }
+  // 와장창 (각성 후 파편 · 프리즘 균열)
+  function sShatter(A, at, size) {
+    const n = 8 + Math.round(size * 5);
+    for (let i = 0; i < n; i++) {
+      const t = at + A.r() * 0.3 * (0.6 + size * 0.15);
+      sNoise(A, t, { ft: 'highpass', f: 3500 + A.r() * 4500, dur: 0.04 + A.r() * 0.09, gain: 0.05 + A.r() * 0.05, Q: 0.7 });
+      if (i % 2 === 0) sTone(A, t, { f: Math.min(2600 + A.r() * 3800, A.ac.sampleRate * 0.45), dur: 0.18 + A.r() * 0.3, gain: 0.022 });
+    }
+  }
+  // 타닥타닥 (꽃가루)
+  function sCrackle(A, at, dur, dens) {
+    const n = Math.round(dur * dens);
+    for (let i = 0; i < n; i++) sNoise(A, at + A.r() * dur, { f: 1800 + A.r() * 4000, Q: 4, dur: 0.02, gain: 0.04 + A.r() * 0.05 });
+  }
+  // 톡 (대사 한 글자 · 카드 이름 태그)
+  function sTick(A, at, gain = 0.045) {
+    sTone(A, at, { type: 'triangle', f: 1500 + A.r() * 500, dur: 0.05, gain });
+    sNoise(A, at, { ft: 'highpass', f: 4000, dur: 0.015, gain: gain * 0.6 });
+  }
+  // 두근 (각성 전 긴장감)
+  function sHeart(A, at, size) {
+    sTone(A, at, { f: 70, f1: 40, dur: 0.18, gain: 0.38 * size });
+    sTone(A, at + 0.22, { f: 62, f1: 36, dur: 0.2, gain: 0.26 * size });
+  }
+  // 사각사각 (싸인)
+  function sScribble(A, at, dur) {
+    for (let t = 0; t < dur; t += 0.07) sNoise(A, at + t, { f: 2200 + A.r() * 2200, Q: 2.5, dur: 0.06, gain: 0.04, a: 0.01 });
+  }
+  // 지직 (★5 프리즘 글리치)
+  function sGlitch(A, at) {
+    for (let i = 0; i < 10; i++) sTone(A, at + i * 0.03, { type: 'square', f: 400 + A.r() * 2400, dur: 0.03, gain: 0.025 });
+  }
+
+  const REVEAL_CHORD = [
+    [72, 79], [72, 76, 79], [72, 76, 79, 84], [72, 76, 79, 83, 86],
+    [72, 76, 79, 83, 86, 91], [72, 76, 79, 83, 86, 91, 95]
+  ];
+  const PENTA = [84, 86, 88, 91, 93];
+
+  // 타임라인 → 소리 목록 (그림과 같은 시간 계산을 씀)
+  function buildCues() {
+    const T = TL(), s = state.stars, cues = [];
+    const add = (t, f) => cues.push({ t, f });
+
+    // ── 1) 인트로 : 객석 웅성임 → 응축 → 폭발 ──
+    const d = T.intro;
+    add(0, (A, at) => {
+      sNoise(A, at, { ft: 'lowpass', f: 520, dur: d, gain: 0.05 + s * 0.008, a: d * 0.6, Q: 0.4 });
+      sPad(A, at, [33, 40], 0.05 + s * 0.012, d, { a: d * 0.5, rel: 0.25, lp: 260 + s * 60 });
+    });
+    if (s >= 3) {
+      const nb = s >= 5 ? 4 : s >= 4 ? 3 : 2;
+      for (let i = 0; i < nb; i++) add(0.1 + i * 0.13, (A, at) => {
+        sNoise(A, at, { ft: 'lowpass', f: 900, f1: 200, dur: 0.3, gain: 0.2 });
+        sTone(A, at, { f: 95, f1: 55, dur: 0.25, gain: 0.28 });
+      });
+    }
+    add(d * 0.18, (A, at) => {
+      const n = 4 + s * 2;
+      for (let i = 0; i < n; i++) sBell(A, at + (i / n) * d * 0.5 + A.r() * 0.05, PENTA[i % 5] + 12, 0.018 + 0.004 * s, 0.5);
+    });
+    add(d * 0.25, (A, at) => sRiser(A, at, d * 0.51, 0.6 + s * 0.12));
+    if (s >= 4) add(d * 0.5, (A, at) => sPad(A, at, s >= 5 ? [60, 64, 67, 71, 74] : [60, 64, 67, 72], 0.04, d * 0.5 + 0.6, { a: d * 0.3, rel: 0.5, lp: 2400, type: 'triangle' }));
+    if (s >= 5) add(d * 0.6, (A, at) => {
+      sGlitch(A, at); sShatter(A, at + 0.05, 2);
+      sNoise(A, at, { ft: 'lowpass', f: 140, dur: d * 0.4, gain: 0.22, a: 0.1, Q: 0.6 });
+    });
+    add(d * 0.76, (A, at) => { sImpact(A, at, 0.5 + s * 0.12); if (s >= 3) sBell(A, at, 96, 0.05, 1.6); });
+    add(Math.max(0, d - 0.32), (A, at) => sNoise(A, at, { ft: 'highpass', f: 1500, f1: 9000, dur: 0.34, gain: 0.06 + s * 0.014, a: 0.3, Q: 0.5 }));
+
+    // ── 2) 카드 공개 (각성 전 / 각성 후) ──
+    const reveal = (base, kind, dur) => {
+      const after = kind === 'after';
+      const lv = Math.min(6, s + (after ? 1 : 0));
+      const tr = after ? 2 : 0;
+      const t0 = 0.45;
+      add(base, (A, at) => {
+        sImpact(A, at, 0.35 + lv * 0.1);
+        REVEAL_CHORD[lv - 1].forEach((m, i) => sBell(A, at + i * 0.025, m + tr, 0.085, 1.6 + lv * 0.25));
+        if (lv >= 4) sPad(A, at, REVEAL_CHORD[lv - 1].slice(0, 4).map(m => m - 12 + tr), 0.035 + (lv - 4) * 0.01, 2.6, { a: 0.06, rel: 1.4, lp: 2200 });
+        if (lv >= 5) sNoise(A, at, { ft: 'lowpass', f: 160, dur: 0.65, gain: 0.26, Q: 0.6 });
+        if (after) sShatter(A, at, lv);
+      });
+      add(base + 0.35, (A, at) => sWhoosh(A, at, 0.95, 700, 6000, 0.045));
+      add(base + t0, (A, at) => sWhoosh(A, at, 0.32, 350, 2200, 0.1));
+      add(base + t0 + 0.1, (A, at) => sTick(A, at, 0.05));
+      add(base + t0 + 0.18, (A, at) => sWhoosh(A, at, 0.3, 1500, 4200, 0.05));
+      if (after) add(base + t0 + 0.4, (A, at) => {
+        sBell(A, at, 79 + tr, 0.08, 1); sBell(A, at + 0.07, 86 + tr, 0.08, 1.2);
+        sTone(A, at, { type: 'sawtooth', f: midiHz(55 + tr), dur: 0.5, gain: 0.035, lp: 1800 });
+      });
+      for (let i = 0; i < s; i++) add(base + t0 + 0.55 + i * 0.12, (A, at) => {
+        sBell(A, at, PENTA[i] + tr, 0.1, 0.9);
+        sNoise(A, at, { ft: 'highpass', f: 5000, dur: 0.03, gain: 0.035 });
+      });
+      add(base + t0 + 0.55 + s * 0.12, (A, at) => {
+        const n = 2 + lv * 2;
+        for (let i = 0; i < n; i++) sBell(A, at + i * 0.045, PENTA[i % 5] + 12 + tr, 0.032, 0.6);
+        if (lv >= 5) sBell(A, at + n * 0.045, 108 + tr, 0.045, 1.5);
+      });
+      if (lv >= 4) add(base + 0.1, (A, at) => sCrackle(A, at, Math.min(dur, 3.2), 6 + (lv - 3) * 6));
+      for (let m = 0; ; m++) {
+        const tt = t0 + 1.6 + m * 1.8;
+        if (tt > dur - 0.2) break;
+        add(base + tt, (A, at) => sBell(A, at, 100 + tr, 0.018, 0.4));
+      }
+      if (after && imgs.sig) add(base + 1.4, (A, at) => sScribble(A, at, 1.15));
+    };
+    reveal(T.b0, 'before', T.r1);
+
+    // ── 3) 각성 : 암전 → 두근 → 대사 타이핑 → 빛의 문 ──
+    if (T.aw) {
+      const b = T.a0, d2 = T.awd;
+      add(b, (A, at) => {
+        sTone(A, at, { type: 'sawtooth', f: 320, f1: 55, dur: 0.9, gain: 0.06, lp: 900 });
+        sPad(A, at + 0.3, [31, 38], 0.06 + s * 0.01, Math.max(1.3, d2 - 0.3), { a: 0.6, rel: 0.6, lp: 220 });
+      });
+      for (let t = 0.9; t < d2 - 1.0; t += 1.05) add(b + t, (A, at) => sHeart(A, at, 0.6 + s * 0.08));
+      if (T.hasLine) {
+        add(b + 0.7, (A, at) => { sBell(A, at, 91, 0.035, 1.2); sBell(A, at + 0.12, 98, 0.028, 1.2); });
+        const mctx = document.createElement('canvas').getContext('2d');
+        mctx.font = `600 64px ${FONT}`; setLS(mctx, -1);
+        const chars = wrapLines(mctx, state.line.trim(), 1400).flatMap(l => Array.from(l));
+        const total = chars.length || 1;
+        const textEnd = d2 - 0.85, typeStart = 1.0;
+        const typeDur = Math.max(0.6, Math.min(textEnd - 1.0 - typeStart, total * 0.06));
+        chars.forEach((ch, ci) => {
+          if (!ch.trim()) return;
+          add(b + typeStart + typeDur * (ci / total), (A, at) => sTick(A, at, 0.035));
+        });
+      }
+      add(b + Math.max(0, d2 - 0.8), (A, at) => {
+        sRiser(A, at, 0.8, 1 + s * 0.15);
+        sWhoosh(A, at + 0.3, 0.5, 600, 8000, 0.09);
+      });
+      reveal(T.c0, 'after', T.r2);
+    }
+    cues.sort((x, y) => x.t - y.t);
+    return cues;
+  }
+
+  // 마스터 (볼륨 · 잔향 · 리미터)
+  function makeSfxOut(ac, dest) {
+    const comp = ac.createDynamicsCompressor();
+    comp.threshold.value = -16; comp.knee.value = 12; comp.ratio.value = 4;
+    comp.attack.value = 0.003; comp.release.value = 0.25;
+    const master = ac.createGain(); master.gain.value = (state.sfxVol / 100) * 0.9;
+    const input = ac.createGain();
+    const conv = ac.createConvolver();
+    const len = Math.round(ac.sampleRate * 2.2), ir = ac.createBuffer(2, len, ac.sampleRate), r = rng(4242);
+    for (let c = 0; c < 2; c++) {
+      const d = ir.getChannelData(c);
+      for (let i = 0; i < len; i++) d[i] = (r() * 2 - 1) * Math.pow(1 - i / len, 3.2);
+    }
+    conv.buffer = ir;
+    const wet = ac.createGain(); wet.gain.value = 0.22;
+    input.connect(master); input.connect(conv); conv.connect(wet); wet.connect(master);
+    master.connect(comp); comp.connect(dest);
+    return { input, master };
+  }
+
+  // ---------- 미리보기용 실시간 재생 ----------
+  let sfxAC = null, sfxOut = null, sfxBus = null, sfxUntil = 0, sfxCues = null, sfxKey = '';
+  function ensureAC() {
+    if (!sfxAC) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      sfxAC = new AC();
+      sfxOut = makeSfxOut(sfxAC, sfxAC.destination);
+    }
+    if (sfxAC.state === 'suspended') sfxAC.resume().catch(() => {});
+    return sfxAC;
+  }
+  // 브라우저 정책상 한 번 누르거나 키를 쳐야 소리가 켜짐
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev =>
+    window.addEventListener(ev, () => { if (state.sfx) ensureAC(); }, { passive: true }));
+
+  function cuesNow() {
+    const key = [state.stars, state.speed, state.awaken, state.line, !!imgs.sig].join('|');
+    if (key !== sfxKey || !sfxCues) { sfxKey = key; sfxCues = buildCues(); }
+    return sfxCues;
+  }
+  function sfxStop() {
+    if (sfxBus && sfxAC) {
+      const b = sfxBus;
+      b.gain.setTargetAtTime(0, sfxAC.currentTime, 0.03);
+      setTimeout(() => { try { b.disconnect(); } catch (e) {} }, 500);
+    }
+    sfxBus = null;
+  }
+  function sfxTick() {
+    if (!state.sfx || !playing || exporting || !sfxAC || sfxAC.state !== 'running') {
+      if (sfxBus) sfxStop();
+      sfxUntil = cur;
+      return;
+    }
+    // 처음으로 돌아가거나 장면을 건너뛰면 울리던 소리를 정리
+    if (sfxUntil < cur - 0.08 || sfxUntil > cur + 0.5) { sfxStop(); sfxUntil = cur; }
+    if (!sfxBus) { sfxBus = sfxAC.createGain(); sfxBus.connect(sfxOut.input); }
+    const ahead = cur + 0.12, now = sfxAC.currentTime;
+    const A = { ac: sfxAC, out: sfxBus, r: rng(Math.floor(cur * 1000) + 1) };
+    cuesNow().forEach(c => {
+      if (c.t >= sfxUntil && c.t < ahead) {
+        try { c.f(A, now + Math.max(0, c.t - cur) + 0.02); } catch (e) { console.warn(e); }
+      }
+    });
+    sfxUntil = ahead;
+  }
+
+  // ---------- 저장용: 전체 소리를 한 번에 렌더 ----------
+  async function renderSfx(seconds, sr = 48000) {
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!OAC) return null;
+    const oac = new OAC(2, Math.ceil(seconds * sr), sr);
+    const out = makeSfxOut(oac, oac.destination);
+    const A = { ac: oac, out: out.input, r: rng(1234) };
+    buildCues().forEach(c => { if (c.t < seconds) { try { c.f(A, c.t + 0.001); } catch (e) {} } });
+    return await oac.startRendering();
+  }
+  // AAC로 인코딩 (AAC가 안 되면 Opus, 둘 다 안 되면 null → 소리 없이 저장)
+  async function encodeSfxAAC(seconds) {
+    if (!state.sfx || !window.AudioEncoder || !window.AudioData) return null;
+    const sr = 48000;
+    let cfg = null, muxCodec = null;
+    for (const [c, mc] of [['mp4a.40.2', 'aac'], ['opus', 'opus']]) {
+      const tryCfg = { codec: c, sampleRate: sr, numberOfChannels: 2, bitrate: 160000 };
+      try { if ((await AudioEncoder.isConfigSupported(tryCfg)).supported) { cfg = tryCfg; muxCodec = mc; break; } } catch (e) {}
+    }
+    if (!cfg) return null;
+    try {
+      const buf = await renderSfx(seconds, sr);
+      if (!buf) return null;
+      const chunks = [];
+      let err = null;
+      const enc = new AudioEncoder({ output: (c, m) => chunks.push([c, m]), error: e => { err = e; } });
+      enc.configure(cfg);
+      const L = buf.getChannelData(0), R = buf.getChannelData(1), F = 4800;
+      for (let i = 0; i < L.length; i += F) {
+        const n = Math.min(F, L.length - i);
+        const data = new Float32Array(n * 2);
+        data.set(L.subarray(i, i + n), 0); data.set(R.subarray(i, i + n), n);
+        const ad = new AudioData({ format: 'f32-planar', sampleRate: sr, numberOfFrames: n, numberOfChannels: 2, timestamp: Math.round(i * 1e6 / sr), data });
+        enc.encode(ad); ad.close();
+      }
+      await enc.flush(); enc.close();
+      if (err || !chunks.length) return null;
+      return { chunks, codec: muxCodec, sampleRate: sr, numberOfChannels: 2 };
+    } catch (e) {
+      console.warn('효과음 인코딩 실패 — 소리 없이 저장해요', e);
+      return null;
+    }
+  }
+
   // =========================================================
   //  미리보기 플레이어
   // =========================================================
@@ -1420,6 +2290,7 @@
       }
       drawPreview();
     }
+    sfxTick();
     requestAnimationFrame(loop);
   }
   btnPlay.addEventListener('click', () => {
@@ -1510,6 +2381,30 @@
   });
 
   bindSeg('speed-group', 's', 'speed');
+
+  // 효과음
+  const ICON_SND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  const ICON_MUTE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+  function syncSfx() {
+    $('tog-sfx').classList.toggle('on', !!state.sfx);
+    $('sfx-vol-row').style.opacity = state.sfx ? '' : '0.45';
+    const b = $('btn-sfx');
+    b.innerHTML = state.sfx ? ICON_SND : ICON_MUTE;
+    b.classList.toggle('muted', !state.sfx);
+    b.title = state.sfx ? '효과음 끄기' : '효과음 켜기';
+  }
+  bindToggle('tog-sfx', 'sfx', () => { syncSfx(); if (state.sfx) ensureAC(); });
+  $('btn-sfx').addEventListener('click', () => {
+    state.sfx = !state.sfx; scheduleSave(); syncSfx();
+    if (state.sfx) ensureAC();
+  });
+  const sfxVolEl = $('in-sfx-vol');
+  sfxVolEl.value = state.sfxVol; $('sfx-vol-val').textContent = `${state.sfxVol}%`;
+  sfxVolEl.addEventListener('input', () => {
+    state.sfxVol = +sfxVolEl.value; $('sfx-vol-val').textContent = `${sfxVolEl.value}%`; scheduleSave();
+    if (sfxAC && sfxOut) sfxOut.master.gain.setTargetAtTime((state.sfxVol / 100) * 0.9, sfxAC.currentTime, 0.05);
+  });
+  syncSfx();
   bindSeg('mp4-res', 'r', 'mp4Res');
   bindSeg('gif-size', 'w', 'gifW', v => +v);
   bindSeg('gif-fps', 'f', 'gifFps', v => +v);
@@ -1634,7 +2529,18 @@
         ]);
       } catch (e) { await exportRecorder(w, h); return; }
       const { Muxer, ArrayBufferTarget } = lib;
-      const muxer = new Muxer({ target: new ArrayBufferTarget(), video: { codec: 'avc', width: w, height: h }, fastStart: 'in-memory' });
+      let audio = null;
+      if (state.sfx) {
+        setProgress(0, '효과음 만드는 중…');
+        audio = await encodeSfxAAC(TL().total + HOLD);
+      }
+      const muxer = new Muxer({
+        target: new ArrayBufferTarget(),
+        video: { codec: 'avc', width: w, height: h },
+        ...(audio ? { audio: { codec: audio.codec, sampleRate: audio.sampleRate, numberOfChannels: audio.numberOfChannels } } : {}),
+        fastStart: 'in-memory'
+      });
+      if (audio) audio.chunks.forEach(([c, m]) => muxer.addAudioChunk(c, m));
       let encErr = null;
       const enc = new VideoEncoder({ output: (chunk, meta) => muxer.addVideoChunk(chunk, meta), error: e => { encErr = e; } });
       enc.configure({ codec, width: w, height: h, bitrate, framerate: fps });
@@ -1654,7 +2560,7 @@
       }
       await enc.flush(); enc.close();
       muxer.finalize();
-      setProgress(1, '✓ MP4 저장 완료!');
+      setProgress(1, audio ? '✓ MP4 저장 완료! (효과음 포함)' : (state.sfx ? '✓ MP4 저장 완료! (이 브라우저는 소리 없이 저장돼요)' : '✓ MP4 저장 완료!'));
       await saveBlob(new Blob([muxer.target.buffer], { type: 'video/mp4' }), `${fileBase()}.mp4`);
     } catch (e) {
       console.error(e);
@@ -1672,6 +2578,17 @@
     const T = TL();
     renderFrame(c, 0, w / W);
     const stream = cv.captureStream(30);
+    if (state.sfx) {
+      const ac = ensureAC();
+      if (ac && ac.createMediaStreamDestination) {
+        const dest = ac.createMediaStreamDestination();
+        const o = makeSfxOut(ac, dest);
+        const A = { ac, out: o.input, r: rng(1234) };
+        const t0 = ac.currentTime + 0.05;
+        buildCues().forEach(c => { try { c.f(A, t0 + c.t); } catch (e) {} });
+        dest.stream.getAudioTracks().forEach(tr => stream.addTrack(tr));
+      }
+    }
     const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 10e6 });
     const chunks = [];
     rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
